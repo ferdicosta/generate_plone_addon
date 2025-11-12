@@ -1,0 +1,103 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:browser="http://namespaces.zope.org/browser"
+  xmlns:plone="http://namespaces.plone.org/plone"
+  i18n_domain="{{package_name}}">
+
+  <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
+  <include package="z3c.jbot" file="meta.zcml"/>
+  <browser:jbot
+    directory="overrides"
+    layer="{{package_name}}.interfaces.I{{package_layer}}Layer"
+  />
+
+  <!-- Publish static files -->
+  <plone:static
+    name="{{package_name}}"
+    type="plone"
+    directory="static"
+  />
+
+  <browser:resourceDirectory
+    name="{{package_name}}.css"
+    directory="css"
+  />
+
+  <browser:resourceDirectory
+    name="{{package_name}}.js"
+    directory="js"
+  />
+
+  <browser:resourceDirectory
+    name="{{package_name}}.fonts"
+    directory="fonts"
+  />
+
+  <browser:resourceDirectory
+    name="{{package_name}}.images"
+    directory="images"
+  />
+
+  <browser:resourceDirectory
+    name="{{package_name}}.icons"
+    directory="icons"
+  />
+
+  <!-- Main Template -->
+  <browser:page
+    for="*"
+    name="main_template"
+    class=".main_template.MainTemplate"
+    permission="zope.Public"
+    layer="{{package_name}}.interfaces.I{{package_layer}}Layer"
+  />
+
+  <!-- Viewlets -->
+  <browser:viewletManager
+    name="{{namespace}}.mainnavigationmanager"
+    provides=".interfaces.IMainNavigationManager"
+    class="plone.app.viewletmanager.manager.OrderedViewletManager"
+    permission="zope2.View"
+  />
+
+  <browser:viewlet
+    name="{{namespace}}.mainnavigation"
+    manager=".interfaces.IMainNavigationManager"
+    class=".viewlets.MainNav"
+    permission="zope2.View"
+    layer="{{package_name}}.interfaces.I{{package_layer}}Layer"
+  />
+
+  <browser:viewletManager
+    name="{{namespace}}.footermanager"
+    provides=".interfaces.IFooterManager"
+    class="plone.app.viewletmanager.manager.OrderedViewletManager"
+    permission="zope2.View"
+  />
+
+  <browser:viewlet
+    name="{{namespace}}.footer"
+    manager=".interfaces.IFooterManager"
+    class=".viewlets.Footer"
+    permission="zope2.View"
+    layer="{{package_name}}.interfaces.I{{package_layer}}Layer"
+  />
+
+  <!-- Pages -->
+  <browser:page
+    name="document_view"
+    for=".default_view.IDefaultView"
+    class=".default_view.DefaultView"
+    template="templates/default_view.pt"
+    permission="zope2.View"
+  />
+
+  <!-- Utilities -->
+  <browser:page
+    name="user-pdb"
+    for="*"
+    class=".user_pdb.UserPDB"
+    permission="cmf.ManagePortal"
+    layer="{{package_name}}.interfaces.I{{package_layer}}Layer"
+  />
+</configure>

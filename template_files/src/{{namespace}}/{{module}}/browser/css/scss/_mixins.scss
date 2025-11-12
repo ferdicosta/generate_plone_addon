@@ -1,0 +1,91 @@
+@import "variables";
+
+// CLEAN ELEMENTS
+@mixin cleanList {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+@mixin cleanButton {
+  border: 0;
+  background: transparent;
+
+  &:focus {
+    box-shadow: none;
+    outline: 0;
+  }
+}
+
+// OVERLAY
+@mixin absoluteOverlay($bgColor, $z-index) {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: $bgColor;
+  z-index: $z-index;
+}
+
+@mixin pseudoOverlay($bgColor, $z-index){
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: $bgColor;
+  z-index: $z-index;
+}
+
+@mixin linkOverlay($z-index) {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: $z-index;
+}
+
+// POSITION
+@mixin absolutePosition($position) {
+  position: absolute;
+
+  @if $position == 'vertical' {
+    top: 50%;
+    transform: translateY(-50%);
+  } @else if $position == 'horizontal' {
+    left: 50%;
+    transform: translateX(-50%);
+  } @else if $position == 'center' {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+// LINK
+@mixin linkStyles($link, $visit, $hover, $active) {
+  color: $link;
+
+  &:visited {
+    color: $visit;
+  }
+
+  &:hover {
+    color: $hover;
+  }
+
+  &:active {
+    color: $active;
+  }
+}
+
+@mixin inputPlaceholder {
+  &.placeholder { @content; }
+  &:-moz-placeholder { @content; }
+  &::-moz-placeholder { @content; }
+  &:-ms-input-placeholder { @content; }
+  &::-webkit-input-placeholder { @content; }
+}
