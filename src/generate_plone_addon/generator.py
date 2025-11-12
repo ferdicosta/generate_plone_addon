@@ -1,5 +1,7 @@
 import os
 import shutil
+from pathlib import Path
+import logging
 
 TEXT_EXT = {".py", ".zcml", ".cfg", ".pt", ".xml", ".txt", ".rst", ".md", ".po", ".pot", ".sh"}
 
@@ -40,6 +42,11 @@ def copy_template(template_dir, dest_dir, context):
                 shutil.copy2(src_file, dest_file)
 
 
+def get_template_dir():
+    base_path = Path(__file__).resolve().parent
+    return base_path / "template_files"
+
+
 def main():
     addon_name = input("Nome addon (es. guanda.site): ").strip()
 
@@ -61,7 +68,9 @@ def main():
     }
 
     dest_dir = os.path.join(os.getcwd(), addon_name)
-    copy_template("template_files", dest_dir, context)
+    template_dir = get_template_dir()
+
+    copy_template(template_dir, dest_dir, context)
 
     print(f"Addon '{addon_name}' generato in {dest_dir}")
 
