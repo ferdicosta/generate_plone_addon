@@ -1,7 +1,7 @@
 import os
 import shutil
 from pathlib import Path
-import logging
+
 
 TEXT_EXT = {".py", ".zcml", ".cfg", ".pt", ".xml", ".txt", ".rst", ".md", ".po", ".pot", ".sh"}
 

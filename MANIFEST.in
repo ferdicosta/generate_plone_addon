@@ -1,0 +1,1 @@
+recursive-include src/generate_plone_addon/template_files *
