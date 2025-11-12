@@ -59,7 +59,7 @@ def main():
         "package_layer_uppercase": layer_name_uppercase,
     }
 
-    dest_dir = os.path.join(os.getcwd(), addon_name)
+    dest_dir = os.path.join("", addon_name)
     copy_template("template_files", dest_dir, context)
 
     print(f"Addon '{addon_name}' generato in {dest_dir}")
