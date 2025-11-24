@@ -155,12 +155,13 @@ def parse_args(argv=None):
 
 
 def main(argv=None) -> int:
-    args = parse_args(argv)
+    # args = parse_args(argv)
+    #
+    # if args.addon_name:
+    #     addon_name = args.addon_name.strip()
+    # else:
 
-    if args.addon_name:
-        addon_name = args.addon_name.strip()
-    else:
-        addon_name = input("Nome addon (es. plone.site): ").strip()
+    addon_name = input("Nome addon (es. plone.site): ").strip()
 
     if "." not in addon_name:
         print("Errore: usare formato namespace.modulo (es. plone.site)")
