@@ -69,7 +69,19 @@ def get_template_dir() -> Path:
     Restituisce la directory 'template_files' relativa al package.
     (Assume che template_files sia dentro lo stesso package: src/generate_plone_addon/template_files)
     """
-    return Path(__file__).resolve().parent / "template_files"
+    mode = sys.argv[1] if len(sys.argv) > 1 else "addon"
+
+    if mode not in ("addon", "theme"):
+        print(f"Modalità sconosciuta: {mode}")
+        print("Usa: generate_plone_addon [addon|theme]")
+        sys.exit(1)
+
+    if mode == "addon":
+        target = Path(__file__).resolve().parent / "template_addon"
+    else:
+        target = Path(__file__).resolve().parent / "template_theme"
+
+    return target
 
 
 def build_context(addon_name: str) -> Dict[str, str]:
@@ -148,10 +160,10 @@ def main(argv=None) -> int:
     if args.addon_name:
         addon_name = args.addon_name.strip()
     else:
-        addon_name = input("Nome addon (es. guanda.site): ").strip()
+        addon_name = input("Nome addon (es. plone.site): ").strip()
 
     if "." not in addon_name:
-        print("Errore: usare formato namespace.modulo (es. guanda.site)")
+        print("Errore: usare formato namespace.modulo (es. plone.site)")
         return 2
 
     dest_base = Path(args.dest).resolve() if args.dest else Path.cwd().resolve()

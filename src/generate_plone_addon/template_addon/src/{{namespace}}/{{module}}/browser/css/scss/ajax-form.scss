@@ -1,0 +1,135 @@
+$color-danger: #ED291E;
+$color-success: #2EA23E;
+
+.m-form {
+  $self: &;
+  color: #333333;
+
+  sup {
+    color: $color-danger;
+    font-size: 19px;
+    line-height: 0;
+    padding: 0 2px;
+    top: 0;
+  }
+
+  &__apiError {
+    border: 1px solid $color-danger;
+    padding: 20px;
+    display: none;
+    margin-bottom: 30px;
+
+    p {
+      font-size: 13px;
+      margin: 0;
+      color: $color-danger;
+    }
+  }
+
+  &__fieldset {
+    //border: 0;
+    //background-color: transparent;
+    //padding: 0;
+    //margin: 0 0 32px;
+
+    sup {
+      font-size: 21px;
+      top: 3px;
+      color: $color-danger;
+      left: 2px;
+    }
+  }
+
+  &__field,
+  &__subfield {
+    &.has-error {
+      input {
+        border-color: $color-danger;
+      }
+
+      textarea {
+        border-color: $color-danger;
+      }
+
+      #{$self}__validation {
+        border: 1px solid $color-danger;
+        padding: 4px;
+      }
+
+      //#{$self}__checkbox{
+      //  border: 1px solid $color-danger;
+      //}
+    }
+
+    &.is-valid {
+      #{$self}__input {
+        border-color: $color-success;
+      }
+    }
+  }
+
+  &__error,
+  &__success {
+    //font-family: $gothamBook;
+    font-size: 12px;
+    line-height: 16px;
+    padding: 4px 0 1px 1px;
+    position: relative;
+
+    img {
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      top: 50%;
+      left: -8px;
+      transform: translateY(-50%);
+      -webkit-transform: translateY(-50%);
+    }
+  }
+
+  &__error {
+    color: $color-danger;
+  }
+
+  &__success {
+    color: $color-success;
+  }
+
+  &__helper {
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    top: 50%;
+    left: -28px;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+  }
+
+  &__button {
+    display: inline-block;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 700;
+    padding: 10px 20px;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+    border: 0;
+    border-radius: 3px;
+    -webkit-transition: ease all 0.25s;
+    transition: ease all 0.25s;
+    background-color: #337AB7;
+    color: #fff;
+
+    &:hover {
+      -webkit-box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.15);
+      box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.15);
+      -webkit-transform: translateY(-1px);
+      transform: translateY(-1px);
+    }
+  }
+}
+
+p.js-error-wrapper {
+  margin-bottom: 0;
+}
