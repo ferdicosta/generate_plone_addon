@@ -155,7 +155,7 @@ def parse_args(argv=None):
 
 
 def main(argv=None) -> int:
-    # args = parse_args(argv)
+    args = parse_args(argv)
     #
     # if args.addon_name:
     #     addon_name = args.addon_name.strip()
