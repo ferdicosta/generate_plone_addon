@@ -151,6 +151,7 @@ def parse_args(argv=None):
     p.add_argument("--dest", "-d", help="Directory di destinazione (default: cwd).")
     p.add_argument("--dry-run", action="store_true", help="Non scrive nulla, mostra cosa farebbe.")
     p.add_argument("-v", "--verbose", action="store_true", help="Output verboso.")
+    p.add_argument("--name", help = "Nome del pacchetto da creare")
     return p.parse_args(argv)
 
 
@@ -161,7 +162,7 @@ def main(argv=None) -> int:
     #     addon_name = args.addon_name.strip()
     # else:
 
-    addon_name = input("Nome addon (es. plone.site): ").strip()
+    addon_name = args.name
 
     if "." not in addon_name:
         print("Errore: usare formato namespace.modulo (es. plone.site)")
