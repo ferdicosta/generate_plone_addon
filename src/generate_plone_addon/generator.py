@@ -147,7 +147,7 @@ def copy_template(template_dir: Path, dest_base: Path, context: Dict[str, str],
 
 def parse_args(argv=None):
     p = argparse.ArgumentParser(description="Genera un addon Plone da template_files.")
-    p.add_argument("addon_name", nargs="?", help="Nome addon (es. guanda.site). Se omesso verrà chiesto interattivamente.")
+    p.add_argument("addon_name", nargs="?", help="Nome addon (es. plone.site). Se omesso verrà chiesto interattivamente.")
     p.add_argument("--dest", "-d", help="Directory di destinazione (default: cwd).")
     p.add_argument("--dry-run", action="store_true", help="Non scrive nulla, mostra cosa farebbe.")
     p.add_argument("-v", "--verbose", action="store_true", help="Output verboso.")

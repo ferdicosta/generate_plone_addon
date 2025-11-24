@@ -1,1 +1,2 @@
-recursive-include src/generate_plone_addon/template_files *
+recursive-include src/generate_plone_addon/template_addon *
+recursive-include src/generate_plone_addon/template_theme *
