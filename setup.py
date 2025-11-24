@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "generate_plone_addon",
-    version = "0.3.5",
+    version = "0.4",
     description = "Generator per addon Plone",
     long_description = "",
     packages = find_packages(where = "src"),

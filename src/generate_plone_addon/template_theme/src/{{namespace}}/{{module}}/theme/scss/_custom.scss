@@ -1,3 +1,5 @@
+@import "variables";
+
 #portal-logo img {
   filter: invert(60%) sepia(75%) saturate(503%) hue-rotate(62deg) brightness(93%) contrast(91%);
 }
@@ -20,3 +22,21 @@
   border: 0;
 }
 
+.itemRow {
+  vertical-align: middle;
+
+  .title {
+    div {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .badge {
+        color: $secondary !important;
+        background-color: transparent !important;
+        margin-left: auto;
+      }
+    }
+  }
+}
