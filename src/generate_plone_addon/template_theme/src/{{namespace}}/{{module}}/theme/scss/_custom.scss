@@ -6,12 +6,93 @@
 
 .portalMessage {
   position: fixed;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  right: 20px;
+  bottom: 20px;
+  width: 436px;
   text-align: center;
   margin: 0 !important;
   z-index: 999;
+
+  &__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    border: 0;
+    background: transparent;
+    padding: 0;
+  }
+
+  &.statusmessage {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    right: -600px;
+    font-size: 16px;
+    line-height: 1.2;
+    text-align: left;
+    color: #000;
+    border-width: 0 0 4px 0;
+    border-style: solid;
+    transition: ease-out all 0.3s;
+
+    &.show {
+      right: 20px;
+      transition: ease-out all 0.3s;
+    }
+
+    svg {
+      width: 20px;
+      height: auto;
+      margin: 0 !important;
+    }
+
+    strong {
+      display: none;
+    }
+
+    &.alert {
+      padding: 46px 24px 46px 12px;
+
+      &-info {
+        border-color: $info !important;
+        background-color: $info--light;
+
+        svg {
+          path {
+            stroke: $info--dark;
+          }
+        }
+      }
+
+      &-warning {
+        border-color: $warning !important;
+        background-color: $warning--light;
+
+        svg {
+          path {
+            stroke: $warning--dark;
+          }
+        }
+      }
+
+      &-danger {
+        border-color: $danger !important;
+        background-color: $danger--light;
+
+        svg {
+          path {
+            stroke: $danger--dark;
+          }
+        }
+      }
+    }
+  }
 }
 
 .tox .tox-sidebar-wrap {
