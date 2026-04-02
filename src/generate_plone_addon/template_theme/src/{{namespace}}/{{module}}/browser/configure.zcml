@@ -94,6 +94,14 @@
 
   <!-- Utilities -->
   <browser:page
+    name="interfaces"
+    for="*"
+    class=".interfaces_view.InterfacesView"
+    template="templates/interfaces_view.pt"
+    permission="zope2.View"
+  />
+
+  <browser:page
     name="user-pdb"
     for="*"
     class=".user_pdb.UserPDB"

@@ -1,8 +1,31 @@
 <?xml version="1.0"?>
 <registry
-    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    i18n:domain="{{package_name}}">
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  i18n:domain="{{package_name}}">
 
-<!-- -*- extra stuff goes here -*- -->
-
+  <!-- -*- extra stuff goes here -*- -->
+  <record name="plone.icon.plone-statusmessage-danger">
+    <field type="plone.registry.field.TextLine">
+      <title>Plone Icon Statusmessage Danger</title>
+    </field>
+    <value>++plone++cis.site/info.svg</value>
+  </record>
+  <record name="plone.icon.plone-statusmessage-error">
+    <field type="plone.registry.field.TextLine">
+      <title>Plone Icon Statusmessage Error</title>
+    </field>
+    <value>++plone++cis.site/info.svg</value>
+  </record>
+  <record name="plone.icon.plone-statusmessage-info">
+    <field type="plone.registry.field.TextLine">
+      <title>Plone Icon Statusmessage Info</title>
+    </field>
+    <value>++plone++cis.site/info.svg</value>
+  </record>
+  <record name="plone.icon.plone-statusmessage-warning">
+    <field type="plone.registry.field.TextLine">
+      <title>Plone Icon Statusmessage Warning</title>
+    </field>
+    <value>++plone++cis.site/info.svg</value>
+  </record>
 </registry>

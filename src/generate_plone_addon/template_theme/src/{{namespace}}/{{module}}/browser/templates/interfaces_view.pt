@@ -1,0 +1,86 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+   metal:use-macro="context/main_template/macros/master"
+   i18n:domain="{{package_name}}">
+<head>
+  <metal:block fill-slot="style_slot"></metal:block>
+  <metal:block fill-slot="javascript_head_slot"></metal:block>
+</head>
+
+<body>
+
+<metal:main fill-slot="content" tal:define="available view/getAvailableInterfaceNames; provided view/getDirectlyProvidedNames">
+  <header class="i-header">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-12">
+          <h1 class="i-header__title">Gestione Interfacce</h1>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="i-section">
+    <div class="container">
+      <form action="." method="post" tal:attributes="action request/ACTUAL_URL">
+        <div class="i-section__grid">
+          <div class="i-card i-card--available" tal:define="available python:view.getAvailableInterfaceNames()">
+            <div class="i-card__header">
+              <h2>Interfacce disponibili</h2>
+              <span tal:content="python: len(available)">0</span>
+            </div>
+            <div class="i-card__body">
+              <p tal:condition="not: available">Nessuna interfaccia disponibile.</p>
+              <div class="i-group" tal:repeat="group available">
+                <h3 class="i-group__title"><span tal:content="group/group"></span>(<span tal:content="python: len(group['interfaces'])">0</span>)</h3>
+                <ul class="i-list">
+                  <li tal:repeat="interface group/interfaces">
+                    <label>
+                      <input type="checkbox" name="add:list" tal:attributes="id interface/name; value interface/dotted"/>
+                      <span>
+                        <strong tal:content="python: interface['name']"></strong>
+                        <i tal:content="python: interface['doc']"></i>
+                      </span>
+                    </label>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="i-card__footer" tal:condition="available">
+              <input class="i-btn i-btn--success" type="submit" name="SAVE" value="Aggiungi"/>
+            </div>
+          </div>
+
+          <div class="i-card i-card--active">
+            <div class="i-card__header">
+              <h2>Interfacce attive</h2>
+              <span tal:content="python: len(view.getDirectlyProvidedNames())">0</span>
+            </div>
+            <div class="i-card__body">
+              <p class="empty-state" tal:condition="not: view/getDirectlyProvidedNames">Nessuna interfaccia applicata a questo oggetto.</p>
+              <ul class="i-list" tal:condition="view/getDirectlyProvidedNames">
+                <li tal:repeat="interface view/getDirectlyProvidedNames">
+                  <label>
+                    <input type="checkbox" name="remove:list" tal:attributes="id interface/name; value interface/dotted"/>
+                    <span>
+                      <strong tal:content="python: interface['name']"></strong>
+                      <i tal:content="python: interface['doc']"></i>
+                    </span>
+                  </label>
+                </li>
+              </ul>
+            </div>
+            <div class="i-card__footer" tal:condition="view/getDirectlyProvidedNames">
+              <input class="i-btn i-btn--danger" type="submit" name="SAVE" value="Rimuovi"/>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+</metal:main>
+
+</body>
+</html>
