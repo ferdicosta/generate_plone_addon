@@ -2,7 +2,7 @@ import logging
 
 from Products.Five import BrowserView
 from Products.Five.utilities.interfaces import IMarkerInterfaces
-from cis.site.interfaces import CustomViewInterface
+from {{package_name}} import CustomViewInterface
 from zope.interface import Interface
 
 logger = logging.getLogger(__name__)

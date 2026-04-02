@@ -8,24 +8,24 @@
     <field type="plone.registry.field.TextLine">
       <title>Plone Icon Statusmessage Danger</title>
     </field>
-    <value>++plone++cis.site/info.svg</value>
+    <value>++plone++{{package_name}}/info.svg</value>
   </record>
   <record name="plone.icon.plone-statusmessage-error">
     <field type="plone.registry.field.TextLine">
       <title>Plone Icon Statusmessage Error</title>
     </field>
-    <value>++plone++cis.site/info.svg</value>
+    <value>++plone++{{package_name}}/info.svg</value>
   </record>
   <record name="plone.icon.plone-statusmessage-info">
     <field type="plone.registry.field.TextLine">
       <title>Plone Icon Statusmessage Info</title>
     </field>
-    <value>++plone++cis.site/info.svg</value>
+    <value>++plone++{{package_name}}/info.svg</value>
   </record>
   <record name="plone.icon.plone-statusmessage-warning">
     <field type="plone.registry.field.TextLine">
       <title>Plone Icon Statusmessage Warning</title>
     </field>
-    <value>++plone++cis.site/info.svg</value>
+    <value>++plone++{{package_name}}/info.svg</value>
   </record>
 </registry>
