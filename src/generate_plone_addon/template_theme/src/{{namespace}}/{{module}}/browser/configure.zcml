@@ -6,6 +6,9 @@
 
   <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
   <include package="z3c.jbot" file="meta.zcml"/>
+
+  <utility factory=".utils.Utils"/>
+
   <browser:jbot
     directory="overrides"
     layer="{{package_name}}.interfaces.I{{package_layer}}Layer"
@@ -102,9 +105,9 @@
   />
 
   <browser:page
-    name="user-pdb"
+    name="pdb"
     for="*"
-    class=".user_pdb.UserPDB"
+    class=".pdb.PDB"
     permission="cmf.ManagePortal"
     layer="{{package_name}}.interfaces.I{{package_layer}}Layer"
   />

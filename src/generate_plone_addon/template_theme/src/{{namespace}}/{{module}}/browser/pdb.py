@@ -2,15 +2,15 @@ from Products.Five import BrowserView
 from zope.interface import Interface
 
 
-class IUserPDB(Interface):
+class IPDB(Interface):
     """
-    IUserPDB view interface
+    IPDB view interface
     """
 
 
-class UserPDB(BrowserView):
+class PDB(BrowserView):
     """
-    UserPDB browser view
+    PDB browser view
     """
 
     def __init__(self, context, request):
@@ -18,4 +18,4 @@ class UserPDB(BrowserView):
         self.request = request
 
     def __call__(self):
-        import pdb; pdb.set_trace()
+        breakpoint()
