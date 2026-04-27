@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Installer for the {{package_name}} package."""
 
-from setuptools import find_packages
+from setuptools import find_namespace_packages
 from setuptools import setup
 
 
@@ -44,8 +44,7 @@ setup(
         # 'Documentation': 'https://{{package_name}}.readthedocs.io/en/latest/',
     },
     license="GPL version 2",
-    packages=find_packages("src", exclude=["ez_setup"]),
-    namespace_packages=["{{namespace}}"],
+    packages=find_namespace_packages("src", exclude=["ez_setup"]),
     package_dir={"": "src"},
     include_package_data=True,
     zip_safe=False,
