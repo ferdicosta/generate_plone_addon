@@ -55,7 +55,7 @@ class Utils(object):
     def is_admin():
         current = api.user.get_current()
 
-        if current.getId() in ['zope']:
+        if current.getId() in ['{{admin_user}}']:
             return True
 
         return False

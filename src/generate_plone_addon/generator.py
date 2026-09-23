@@ -64,7 +64,7 @@ def get_template_dir() -> Path:
     return template_dir
 
 
-def build_context(addon_name: str) -> Dict[str, str]:
+def build_context(addon_name: str, admin_user: str = "admin") -> Dict[str, str]:
     namespace, module = addon_name.split(".", 1)
 
     layer_name = "".join(part.capitalize() for part in addon_name.split("."))
@@ -77,6 +77,7 @@ def build_context(addon_name: str) -> Dict[str, str]:
         "package_layer": layer_name,
         "package_name": addon_name,
         "package_layer_uppercase": layer_name_uppercase,
+        "admin_user": admin_user,
     }
 
 
@@ -140,6 +141,11 @@ def parse_args(argv=None):
         "--name",
         help = "Nome del pacchetto da creare"
     )
+    parser.add_argument(
+        "--admin-user",
+        default = "admin",
+        help = "Nome utente amministratore Zope/Plone (default: admin)."
+    )
 
     return parser.parse_args(argv)
 
@@ -162,7 +168,7 @@ def main(argv=None) -> int:
     dest_base = Path(args.dest).resolve() if args.dest else Path.cwd().resolve()
     dest_dir = dest_base / addon_name
 
-    context = build_context(addon_name)
+    context = build_context(addon_name, admin_user = args.admin_user)
     template_dir = get_template_dir()
 
     if args.verbose:

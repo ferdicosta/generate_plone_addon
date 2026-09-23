@@ -1,0 +1,106 @@
+<metal:page define-macro="master">
+  <tal:doctype tal:replace="structure string:&lt;!DOCTYPE html&gt;" />
+
+  <html xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:tal="http://xml.zope.org/namespaces/tal"
+        xmlns:metal="http://xml.zope.org/namespaces/metal"
+        xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+     tal:define="portal_state python:context.restrictedTraverse('@@plone_portal_state');
+    context_state python:context.restrictedTraverse('@@plone_context_state');
+    plone_view python:context.restrictedTraverse('@@plone');
+    icons python:context.restrictedTraverse('@@iconresolver');
+    plone_layout python:context.restrictedTraverse('@@plone_layout');
+    lang python:portal_state.language();
+    view nocall:view | nocall: plone_view;
+    dummy python: plone_layout.mark_view(view);
+    portal_url python:portal_state.portal_url();
+    checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;
+    ajax_include_head python:request.get('ajax_include_head', False);
+    ajax_load python:True;"
+     i18n:domain="{{package_name}}"
+     tal:attributes="lang lang;">
+
+      <metal:cache tal:replace="structure provider:plone.httpheaders" />
+
+  <head>
+    <meta charset="utf-8"/>
+
+    <tal:ajaxhead condition="ajax_include_head">
+      <div tal:replace="structure provider:plone.htmlhead" />
+
+      <tal:comment replace="nothing">
+        Various slots where you can insert elements in the header from a template.
+      </tal:comment>
+      <metal:topslot define-slot="top_slot"/>
+      <metal:headslot define-slot="head_slot"/>
+
+      <div tal:replace="structure provider:plone.scripts" />
+      <script src="++resource++{{package_name}}.js/scripts.js"></script>
+      <metal:javascriptslot define-slot="javascript_head_slot"/>
+
+      <link tal:replace="structure provider:plone.htmlhead.links" />
+      <link rel="stylesheet" href="++resource++{{package_name}}.css/fontawesome.css" type="text/css"/>
+      <link rel="stylesheet" href="++resource++{{package_name}}.css/style.css" type="text/css"/>
+      <metal:styleslot define-slot="style_slot"/>
+
+      <meta name="generator" content="Plone - https://plone.org/"/>
+    </tal:ajaxhead>
+
+  </head>
+
+  <body tal:define="isRTL portal_state/is_rtl;
+    sl python:plone_layout.have_portlets('plone.leftcolumn', view);
+    sr python:plone_layout.have_portlets('plone.rightcolumn', view);
+    body_class python:plone_layout.bodyClass(template, view);"
+     tal:attributes="class string: ${body_class} ajax_load;
+    dir python:isRTL and 'rtl' or 'ltr';
+    python:context.restrictedTraverse('@@plone_patterns_settings')();"
+    id="visual-portal-wrapper">
+
+  <div id="global_statusmessage">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <tal:message tal:content="structure provider:plone.globalstatusmessage"/>
+          <div metal:define-slot="global_statusmessage"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="portal-column-content">
+    <metal:block define-slot="content">
+      <metal:content metal:define-macro="content">
+        <div class="container mb-5">
+          <div class="row">
+            <div class="col-md-12">
+              <metal:slot define-slot="body">
+                <article id="content">
+                  <metal:bodytext define-slot="main">
+                    <header class="mb-4">
+                      <metal:title define-slot="content-title">
+                        <h1 tal:replace="structure context/@@title" />
+                      </metal:title>
+                      <metal:description define-slot="content-description">
+                        <p tal:replace="structure context/@@description" />
+                      </metal:description>
+                    </header>
+                    <div id="content-core">
+                      <metal:text define-slot="content-core" tal:content="nothing">
+                        Page body text
+                      </metal:text>
+                    </div>
+                  </metal:bodytext>
+                </article>
+              </metal:slot>
+            </div>
+          </div>
+        </div>
+      </metal:content>
+    </metal:block>
+  </main>
+
+  </body>
+  </html>
+
+</metal:page>
