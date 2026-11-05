@@ -15,6 +15,15 @@ body {
   flex-direction: column;
   color: $colorGrey--700;
   min-height: 100%;
+
+  &.template-login {
+    .m-main {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+    }
+  }
 }
 
 a {
