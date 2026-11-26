@@ -67,7 +67,7 @@
     </div>
   </div>
 
-  <main id="portal-column-content">
+  <main id="portal-column-content" class="m-main">
     <metal:block define-slot="content">
       <metal:content metal:define-macro="content">
         <div class="container mb-5">

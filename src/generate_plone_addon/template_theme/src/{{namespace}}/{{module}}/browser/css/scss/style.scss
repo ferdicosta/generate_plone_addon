@@ -39,6 +39,10 @@ img {
   max-width: 100%;
 }
 
+.m-main {
+  margin: 0;
+}
+
 .m-nav {
   border-bottom: 1px solid #f1f1f1;
   padding: 15px 0;
@@ -103,7 +107,7 @@ img {
 .m-login {
   $self: &;
   display: grid;
-  grid-template-columns: 5fr 7fr;
+  grid-template-columns: 6fr 6fr;
   width: 100%;
 
   &__aside {
@@ -112,7 +116,7 @@ img {
     justify-content: space-between;
     gap: 40px;
     color: #fff;
-    background-color: $colorGrey--800;
+    background-color: $colorTertiary;
     padding: 48px;
 
     .m-logo {
@@ -123,7 +127,7 @@ img {
   &__claim {
     font-size: 24px;
     line-height: 1.3;
-    color: $colorGrey--300;
+    color: $colorPrimary;
     margin: 0;
   }
 
@@ -179,8 +183,8 @@ img {
       transition: ease-out border-color .25s, ease-out box-shadow .25s;
 
       &:focus {
-        border-color: $colorGrey--600;
-        box-shadow: 0 0 0 3px rgba($colorGrey--600, .15);
+        border-color: $colorSecondary;
+        box-shadow: 0 0 0 3px rgba($colorPrimary, .2);
         outline: 0;
       }
     }
@@ -203,17 +207,17 @@ img {
       color: #fff;
       border: 0;
       border-radius: 6px;
-      background-color: $colorGrey--800;
+      background-color: $colorSecondary;
       padding: 12px 20px;
       transition: ease-out background-color .25s, ease-out box-shadow .25s;
 
       &:hover,
       &:focus-visible {
-        background-color: #000;
+        background-color: $colorTertiary;
       }
 
       &:focus-visible {
-        box-shadow: 0 0 0 3px rgba($colorGrey--800, .25);
+        box-shadow: 0 0 0 3px rgba($colorPrimary, .3);
       }
     }
   }
@@ -226,14 +230,14 @@ img {
       padding-top: 32px;
 
       .btn-primary {
-        color: $colorGrey--800;
+        color: $colorTertiary;
         background-color: transparent;
-        box-shadow: inset 0 0 0 1px $colorGrey--800;
+        box-shadow: inset 0 0 0 1px $colorSecondary;
 
         &:hover,
         &:focus-visible {
           color: #fff;
-          background-color: $colorGrey--800;
+          background-color: $colorSecondary;
         }
       }
     }
@@ -264,7 +268,7 @@ img {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      @include linkStyles($colorGrey--600, $colorGrey--600, #000, #000);
+      @include linkStyles($colorTertiary, $colorTertiary, $colorSecondary, $colorSecondary);
       transition: ease-out color .25s;
     }
   }

@@ -2,7 +2,7 @@ from setuptools import setup, find_namespace_packages
 
 setup(
     name = "generate_plone_addon",
-    version = "0.9.9",
+    version = "0.9.9.1",
     description = "Generator per addon Plone",
     long_description = "",
     packages = find_namespace_packages(where = "src"),
