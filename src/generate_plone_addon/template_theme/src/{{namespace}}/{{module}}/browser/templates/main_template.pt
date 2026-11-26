@@ -14,6 +14,7 @@
     view nocall:view | nocall: plone_view;
     dummy python: plone_layout.mark_view(view);
     portal_url python:portal_state.portal_url();
+    assets nocall:context/@@assets;
     checkPermission python:context.restrictedTraverse('portal_membership').checkPermission;
     ajax_include_head python:request.get('ajax_include_head', False);
     ajax_load python:False;"
@@ -34,8 +35,8 @@
     <metal:headslot define-slot="head_slot"/>
 
     <link tal:replace="structure provider:plone.htmlhead.links" />
-    <link rel="stylesheet" tal:attributes="href string:${portal_url}/++resource++{{package_name}}.css/fontawesome.css" type="text/css"/>
-    <link rel="stylesheet" tal:attributes="href string:${portal_url}/++resource++{{package_name}}.css/style.css" type="text/css"/>
+    <link rel="stylesheet" tal:attributes="href python:assets.url('++resource++{{package_name}}.css/fontawesome.css')" type="text/css"/>
+    <link rel="stylesheet" tal:attributes="href python:assets.url('++resource++{{package_name}}.css/style.css')" type="text/css"/>
     <metal:styleslot define-slot="style_slot"/>
 
     <meta name="generator" content="Plone - https://plone.org/"/>
@@ -128,7 +129,7 @@
   <tal:footermanager tal:content="structure provider:{{namespace}}.footermanager"/>
 
   <div tal:replace="structure provider:plone.scripts" />
-  <script tal:attributes="src string:${portal_url}/++resource++{{package_name}}.js/scripts.js"></script>
+  <script tal:attributes="src python:assets.url('++resource++{{package_name}}.js/scripts.js')"></script>
   <metal:javascriptslot define-slot="javascript_head_slot"/>
 
   </body>

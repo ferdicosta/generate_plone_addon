@@ -104,6 +104,15 @@
     permission="cmf.ManagePortal"
   />
 
+  <!-- URL degli asset statici con ?v=<data del file> (cache busting), vedi assets.py -->
+  <browser:page
+    name="assets"
+    for="*"
+    class=".assets.AssetsView"
+    allowed_attributes="url version"
+    permission="zope2.Public"
+  />
+
   <browser:page
     name="pdb"
     for="*"
