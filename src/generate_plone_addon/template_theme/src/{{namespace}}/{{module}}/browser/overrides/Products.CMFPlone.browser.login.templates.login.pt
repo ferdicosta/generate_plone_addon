@@ -1,34 +1,28 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      lang="en"
-   i18n:domain="plone"
-   metal:use-macro="context/main_template/macros/master"
->
+      i18n:domain="plone"
+      metal:use-macro="context/main_template/macros/master">
 <body>
-<metal:main fill-slot="content">
-  <section class="m-section">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-8">
-          <a class="m-logo m-logo--login" tal:attributes="href context/portal_url"></a>
-          <div class="m-login">
-            <div id="login-form">
-              <metal:form use-macro="context/@@ploneform-macros/titlelessform"/>
-              <div class="footer mt-4 d-none" tal:define="portal_state context/@@plone_portal_state; portal_url portal_state/portal_url">
-                <div>
-                  <span i18n:translate="trouble_logging_in" tal:omit-tag="">Trouble logging in?</span>
-                  <a href="@@login-help" tal:attributes="href string:${portal_url}/@@login-help" i18n:translate="footer_login_link_get_help">Get help</a>.
-                </div>
-                <div tal:condition="python:view.self_registration_enabled()">
-                  <span i18n:translate="need_an_account" tal:omit-tag="">Need an account?</span>
-                  <a href="@@register" tal:attributes="href string:${portal_url}/registrazione" class="emph" i18n:translate="footer_login_link_signup">Sign up here</a>.
-                </div>
-              </div>
-            </div>
+<metal:main fill-slot="content" tal:define="portal_url context/portal_url">
+  <section class="m-login">
+    <metal:aside use-macro="context/@@{{namespace}}-macros/login_aside"></metal:aside>
+    <div class="m-login__main">
+      <div class="m-login__box">
+        <h1 class="m-login__title">Accedi</h1>
+        <p class="m-login__text">Inserisci le tue credenziali.</p>
+        <div class="m-login__form">
+          <div class="alert alert-danger pat-cookietrigger" style="display: none">
+            I cookie non sono abilitati: abilitali per poter accedere.
           </div>
+          <metal:form use-macro="context/@@ploneform-macros/titlelessform"/>
         </div>
+        <ul class="m-login__links">
+          <li><a tal:attributes="href string:${portal_url}/@@login-help">Hai dimenticato la password?</a></li>
+          <li tal:condition="python:view.self_registration_enabled()"><a tal:attributes="href string:${portal_url}/@@register">Crea un account</a></li>
+          <li><a tal:attributes="href portal_url"><i class="fa-regular fa-arrow-left" aria-hidden="true"></i> Torna al sito</a></li>
+        </ul>
       </div>
     </div>
   </section>

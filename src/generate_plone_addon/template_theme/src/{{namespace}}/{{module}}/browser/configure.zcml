@@ -105,6 +105,14 @@
   />
 
   <!-- URL degli asset statici con ?v=<data del file> (cache busting), vedi assets.py -->
+  <!-- Macro condivise dei template (es. pannello delle pagine di accesso) -->
+  <browser:page
+    name="{{namespace}}-macros"
+    for="*"
+    template="templates/macros.pt"
+    permission="zope2.Public"
+  />
+
   <browser:page
     name="assets"
     for="*"

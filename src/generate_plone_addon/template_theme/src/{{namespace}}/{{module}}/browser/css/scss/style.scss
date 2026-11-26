@@ -16,11 +16,16 @@ body {
   color: $colorGrey--700;
   min-height: 100%;
 
-  &.template-login {
-    .m-main {
+  // Pagine di accesso a tutto schermo: niente navigazione e footer
+  &.template-login,
+  &.template-login-help {
+    .m-nav,
+    .m-footer {
+      display: none;
+    }
+
+    main {
       display: flex;
-      align-items: center;
-      justify-content: center;
       flex: 1;
     }
   }
@@ -92,6 +97,197 @@ img {
 
 .m-section {
   padding: 30px 0;
+}
+
+// Pagine di accesso (login e recupero password): a sinistra il pannello col nome del sito, a destra il form (classi di z3c.form di Plone)
+.m-login {
+  $self: &;
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  width: 100%;
+
+  &__aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 40px;
+    color: #fff;
+    background-color: $colorGrey--800;
+    padding: 48px;
+
+    .m-logo {
+      @include linkStyles(#fff, #fff, #fff, #fff);
+    }
+  }
+
+  &__claim {
+    font-size: 24px;
+    line-height: 1.3;
+    color: $colorGrey--300;
+    margin: 0;
+  }
+
+  &__main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $colorGrey--100;
+    padding: 48px 24px;
+  }
+
+  &__box {
+    width: 100%;
+    max-width: 420px;
+    border: 1px solid $colorGrey--200;
+    border-radius: 8px;
+    background-color: #fff;
+    padding: 40px 32px;
+  }
+
+  &__title {
+    font-size: 28px;
+    line-height: 1.2;
+    font-weight: 600;
+    color: $colorGrey--800;
+    margin-bottom: 8px;
+  }
+
+  &__text {
+    font-size: 15px;
+    line-height: 1.5;
+    color: $colorGrey--500;
+    margin-bottom: 32px;
+  }
+
+  &__form {
+    .field {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      font-weight: 500;
+      color: $colorGrey--800;
+      margin-bottom: 6px;
+    }
+
+    .form-control {
+      height: 44px;
+      color: $colorGrey--800;
+      border: 1px solid $colorGrey--300;
+      border-radius: 6px;
+      padding: 10px 14px;
+      transition: ease-out border-color .25s, ease-out box-shadow .25s;
+
+      &:focus {
+        border-color: $colorGrey--600;
+        box-shadow: 0 0 0 3px rgba($colorGrey--600, .15);
+        outline: 0;
+      }
+    }
+
+    // Spiegazione sopra il campo (sottoform del recupero password)
+    .form-text {
+      font-size: 14px;
+      line-height: 1.5;
+      color: $colorGrey--500;
+      margin-bottom: 12px;
+    }
+
+    .formControls {
+      margin-top: 28px;
+    }
+
+    .btn-primary {
+      width: 100%;
+      font-weight: 600;
+      color: #fff;
+      border: 0;
+      border-radius: 6px;
+      background-color: $colorGrey--800;
+      padding: 12px 20px;
+      transition: ease-out background-color .25s, ease-out box-shadow .25s;
+
+      &:hover,
+      &:focus-visible {
+        background-color: #000;
+      }
+
+      &:focus-visible {
+        box-shadow: 0 0 0 3px rgba($colorGrey--800, .25);
+      }
+    }
+  }
+
+  // Recupero password: un blocco per sottoform, il secondo separato da un filetto e con il bottone a contorno
+  &__subform {
+    + #{$self}__subform {
+      border-top: 1px solid $colorGrey--200;
+      margin-top: 32px;
+      padding-top: 32px;
+
+      .btn-primary {
+        color: $colorGrey--800;
+        background-color: transparent;
+        box-shadow: inset 0 0 0 1px $colorGrey--800;
+
+        &:hover,
+        &:focus-visible {
+          color: #fff;
+          background-color: $colorGrey--800;
+        }
+      }
+    }
+
+    .formControls {
+      margin-top: 20px;
+    }
+  }
+
+  &__subtitle {
+    font-size: 17px;
+    line-height: 1.3;
+    font-weight: 600;
+    color: $colorGrey--800;
+    margin-bottom: 8px;
+  }
+
+  &__links {
+    @include cleanList;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    margin-top: 24px;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      @include linkStyles($colorGrey--600, $colorGrey--600, #000, #000);
+      transition: ease-out color .25s;
+    }
+  }
+
+  @media screen and (max-width: 991px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+
+    &__aside {
+      gap: 16px;
+      padding: 32px 24px;
+    }
+
+    &__claim {
+      font-size: 18px;
+    }
+  }
+
+  @media screen and (max-width: 575px) {
+    &__box {
+      padding: 32px 20px;
+    }
+  }
 }
 
 .m-footer {

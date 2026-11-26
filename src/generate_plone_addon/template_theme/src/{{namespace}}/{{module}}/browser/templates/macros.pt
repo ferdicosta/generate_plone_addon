@@ -1,0 +1,18 @@
+<tal:macros xmlns:tal="http://xml.zope.org/namespaces/tal"
+            xmlns:metal="http://xml.zope.org/namespaces/metal">
+
+  <tal:comment replace="nothing">
+    Componenti condivisi (@@{{namespace}}-macros). Ogni macro dichiara le variabili che si aspetta dal chiamante.
+  </tal:comment>
+
+  <tal:comment replace="nothing">
+    Pannello a sinistra nelle pagine di accesso (login e recupero password).
+  </tal:comment>
+  <metal:aside define-macro="login_aside">
+    <div class="m-login__aside">
+      <a class="m-logo" tal:attributes="href context/portal_url">{{namespace}}</a>
+      <p class="m-login__claim">Area riservata</p>
+    </div>
+  </metal:aside>
+
+</tal:macros>

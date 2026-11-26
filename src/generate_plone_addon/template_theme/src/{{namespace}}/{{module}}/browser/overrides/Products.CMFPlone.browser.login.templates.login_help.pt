@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="plone"
+      metal:use-macro="context/main_template/macros/master">
+<body>
+<metal:main fill-slot="content" tal:define="portal_url context/portal_url">
+  <tal:comment replace="nothing">
+    Recupero della password (@@login-help), con la stessa struttura della pagina di login.
+    I sottoform di Plone (password e, se il login non e' l'email, nome utente) restano in un unico form, come nell'originale.
+  </tal:comment>
+  <section class="m-login">
+    <metal:aside use-macro="context/@@{{namespace}}-macros/login_aside"></metal:aside>
+    <div class="m-login__main">
+      <div class="m-login__box">
+        <h1 class="m-login__title">Serve aiuto?</h1>
+        <p class="m-login__text">Ti invieremo per email le istruzioni per tornare ad accedere.</p>
+        <form class="m-login__form" method="post" novalidate="novalidate"
+              tal:attributes="action view/action; enctype view/enctype">
+          <div class="m-login__subform" tal:repeat="subform view/subforms">
+            <h2 class="m-login__subtitle" tal:condition="repeat/subform/start">Password dimenticata</h2>
+            <h2 class="m-login__subtitle" tal:condition="not:repeat/subform/start">Nome utente dimenticato</h2>
+            <tal:subform replace="structure subform/render"></tal:subform>
+            <span tal:replace="structure context/@@authenticator/authenticator"/>
+          </div>
+        </form>
+        <ul class="m-login__links">
+          <li><a tal:attributes="href string:${portal_url}/login">Torna al login</a></li>
+          <li><a tal:attributes="href portal_url"><i class="fa-regular fa-arrow-left" aria-hidden="true"></i> Torna al sito</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</metal:main>
+</body>
+</html>
