@@ -1,109 +1,177 @@
-function validateVisualAid($form, response_data) {
-  const $submitButton = $(':submit', $form);
-  $form.find('.js-validation-message').remove();
-  $form.find('.has-error').removeClass('has-error');
+class AjaxForm {
+  constructor(form) {
+    this.form = form;
+    this.submit = form.querySelector('.js-submit');
+    this.apiError = form.querySelector('.js-api-error');
+    this.errorTemplate = form.querySelector('.js-error-template');
 
-  const $apiError = $('.js-api-error');
-  $apiError.empty();
-  $apiError.hide();
-  let hasApiError = false;
+    this.onSubmit = this.onSubmit.bind(this);
 
-  $.each(response_data.errors, function (key, value) {
-    let template = $("#error-message");
-    let markupTemplate = template[0].innerHTML;
+    this.bindEvents();
+  }
 
-    let $markup = $(markupTemplate);
-    $markup.find('span').text(value);
+  bindEvents() {
+    this.form.addEventListener('submit', this.onSubmit);
+  }
 
-    let $field = $('[data-name="' + key + '"]');
-    $field.addClass('has-error');
-    $field.find('input[type="text"]').on('focus', function () {
-      let $fieldWrapper = $(this).parents('.has-error');
-      $fieldWrapper.removeClass('has-error');
-      $fieldWrapper.find('.js-error-wrapper').empty();
-      $(this).unbind('focus');
-    });
+  async onSubmit(event) {
+    event.preventDefault();
 
-    $field.find('select').unbind('change');
-    $field.find('select').on('change', function () {
-      let $fieldWrapper = $(this).parents('.has-error');
-      $fieldWrapper.removeClass('has-error');
-      $fieldWrapper.find('.js-error-wrapper').empty();
-    });
+    const data = new FormData(this.form);
 
-    if (key === 'generic') {
-      hasApiError = true;
-      $apiError.html(value);
-      $apiError.fadeIn()
+    if (event.submitter && event.submitter.name === 'form.draft') {
+      data.append('form.draft', '');
     }
 
-    $markup.appendTo($field.find('.js-error-wrapper'));
-  });
+    this.setSubmitting(true);
 
-  let $firstError = $(".register__error.js-validation-message");
+    let response;
 
-  // if ($firstError.length > 0) {
-  //   $([document.documentElement, document.body]).animate({
-  //     scrollTop: $firstError.offset().top - 200
-  //   }, 400);
-  // }
-
-  // in caso di errori di validazione riattiviamo il bottone
-  $submitButton.prop('disabled', false);
-}
-
-$(function () {
-  const $form = $('.js-ajax-form');
-
-  $form.unbind('submit');
-  $form.on('submit', function (e) {
-    e.preventDefault();
-    let $form = $(this);
-    let $submit = $form.find('.js-submit');
-
-    let data = new FormData(this);
-    let $clicked = $('button.clicked');
-    if ($clicked.attr('name') === 'form.draft') {
-      data.append('form.draft', '')
+    try {
+      const res = await fetch(this.form.action, {
+        method: this.form.method || 'post',
+        body: data,
+        credentials: 'same-origin',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'Accept': 'application/json',
+        },
+      });
+      response = await res.json();
+    } catch (error) {
+      console.error('Errore durante l\'invio del form', error);
+      this.setSubmitting(false);
+      return;
     }
 
-    $submit.prop('disabled', true);
+    if (response.status === false) {
+      if (response.type === 'validation') {
+        this.showErrors(response.data);
+        this.setSubmitting(false);
+        this.scrollToFirstError();
+      }
+    } else if (response.type === 'redirect') {
+      window.location = response.data.url;
+    } else if (response.type === 'reload') {
+      window.location.reload();
+    }
+  }
 
-    $.ajax({
-      url: $form.attr("action"),
-      type: $form.attr("method"),
-      dataType: "JSON",
-      data: data,
-      processData: false,
-      contentType: false,
-      success: function (response, status) {
-        if (response.status === false) {
-          if (response.type === 'validation') {
-            validateVisualAid($form, response.data);
-            $submit.prop('disabled', false);
+  setSubmitting(isSubmitting) {
+    if (isSubmitting) {
+      if (this.submit) {
+        this.submit.disabled = true;
+      }
+    } else {
+      this.form.querySelectorAll('[type="submit"], button:not([type])').forEach((btn) => {
+        btn.disabled = false;
+      });
+    }
+  }
 
-            let $firstError = $(".has-error");
+  clearErrors() {
+    this.form.querySelectorAll('.js-validation-message').forEach((el) => el.remove());
+    this.form.querySelectorAll('.is-error').forEach((el) => el.classList.remove('is-error'));
 
-            if ($firstError.length > 0) {
-              $([document.documentElement, document.body]).animate({
-                scrollTop: $firstError.offset().top - 200
-              }, 400);
-            }
-          }
-        } else {
-          if (response.type === 'redirect') {
-            window.location = response.data.url;
-          } else if (response.type === 'reload') {
-            window.location.reload();
-          }
-        }
-      },
-      error: function (xhr, desc, err) {
-        console.log('error')
-      },
-      complete: function () {
+    if (this.apiError) {
+      this.apiError.innerHTML = '';
+      this.apiError.style.display = 'none';
+    }
+  }
+
+  showErrors(responseData) {
+    this.clearErrors();
+
+    Object.entries(responseData.errors || {}).forEach(([key, value]) => {
+      if (key === 'generic') {
+        this.showApiError(value);
+      }
+
+      const field = this.form.querySelector(`[data-name="${CSS.escape(key)}"]`);
+
+      if (!field) {
+        return;
+      }
+
+      field.classList.add('is-error');
+
+      field.querySelectorAll('input[type="text"]').forEach((input) => {
+        input.addEventListener('focus', () => this.clearFieldError(input), { once: true });
+      });
+      field.querySelectorAll('select').forEach((select) => {
+        select.addEventListener('change', () => this.clearFieldError(select), { once: true });
+      });
+
+      const wrapper = field.querySelector('.js-error-wrapper');
+      const message = this.buildErrorMessage(value);
+
+      if (wrapper && message) {
+        wrapper.appendChild(message);
       }
     });
-  });
+  }
 
-})
+  clearFieldError(input) {
+    const field = input.closest('.is-error');
+
+    if (!field) {
+      return;
+    }
+
+    field.classList.remove('is-error');
+
+    const wrapper = field.querySelector('.js-error-wrapper');
+
+    if (wrapper) {
+      wrapper.innerHTML = '';
+    }
+  }
+
+  buildErrorMessage(text) {
+    if (!this.errorTemplate) {
+      return null;
+    }
+
+    const message = this.errorTemplate.content.firstElementChild.cloneNode(true);
+    const span = message.querySelector('span');
+
+    if (span) {
+      span.textContent = text;
+    }
+
+    return message;
+  }
+
+  showApiError(html) {
+    if (!this.apiError) {
+      return;
+    }
+
+    this.apiError.innerHTML = html;
+    this.apiError.style.display = '';
+    this.apiError.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 400 });
+  }
+
+  scrollToFirstError() {
+    const firstError = this.form.querySelector('.is-error');
+
+    if (firstError) {
+      window.scrollTo({
+        top: firstError.getBoundingClientRect().top + window.scrollY - 200,
+        behavior: 'smooth',
+      });
+    }
+  }
+}
+
+function onReady(callback) {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', callback);
+  } else {
+    callback();
+  }
+}
+
+onReady(() => {
+  document.querySelectorAll('.js-ajax-form').forEach((form) => new AjaxForm(form));
+});

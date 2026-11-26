@@ -42,7 +42,7 @@ $color-success: #2EA23E;
 
   &__field,
   &__subfield {
-    &.has-error {
+    &.is-error {
       input {
         border-color: $color-danger;
       }

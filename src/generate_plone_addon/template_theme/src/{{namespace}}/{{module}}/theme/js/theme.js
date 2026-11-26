@@ -1,33 +1,46 @@
-function initStatusMessages() {
-  const messages = document.querySelectorAll('.portalMessage.statusmessage');
+class StatusMessage {
+  constructor(el) {
+    this.el = el;
+    this.close = this.close.bind(this);
 
-  if (!messages.length) return;
+    this.closeBtn = document.createElement('button');
+    this.closeBtn.type = 'button';
+    this.closeBtn.className = 'portalMessage__close';
+    this.closeBtn.textContent = '×';
+    this.closeBtn.setAttribute('aria-label', 'Chiudi messaggio');
+    this.el.insertBefore(this.closeBtn, this.el.firstChild);
 
-  messages.forEach(function (message) {
-    const closeBtn = document.createElement('button');
-    closeBtn.className = 'portalMessage__close';
-    closeBtn.innerHTML = '×';
-    closeBtn.setAttribute('aria-label', 'Chiudi messaggio');
-    closeBtn.type = 'button';
+    this.bindEvents();
+    setTimeout(() => this.open(), 100);
+  }
 
-    message.insertBefore(closeBtn, message.firstChild);
+  bindEvents() {
+    this.closeBtn.addEventListener('click', this.close);
+  }
 
-    closeBtn.addEventListener('click', function () {
-      message.classList.remove('show');
+  open() {
+    this.el.classList.add('show');
+  }
 
-      setTimeout(function () {
-        if (!message.classList.contains('show')) {
-          message.style.display = 'none';
-        }
-      }, 300);
-    });
+  close() {
+    this.el.classList.remove('show');
 
-    setTimeout(function () {
-      message.classList.add('show');
-    }, 100);
-  });
+    setTimeout(() => {
+      if (!this.el.classList.contains('show')) {
+        this.el.style.display = 'none';
+      }
+    }, 300);
+  }
 }
 
-$(document).ready(function(){
-  initStatusMessages();
+function onReady(callback) {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', callback);
+  } else {
+    callback();
+  }
+}
+
+onReady(() => {
+  document.querySelectorAll('.portalMessage.statusmessage').forEach((el) => new StatusMessage(el));
 });
