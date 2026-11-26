@@ -4,6 +4,7 @@
   i18n:domain="{{package_name}}">
 
   <!-- -*- extra stuff goes here -*- -->
+
   <record name="plone.icon.plone-statusmessage-danger">
     <field type="plone.registry.field.TextLine">
       <title>Plone Icon Statusmessage Danger</title>
@@ -28,4 +29,12 @@
     </field>
     <value>++plone++{{package_name}}/info.svg</value>
   </record>
+
+  <!-- Bundle di Plone (jQuery, pattern) solo per chi e' collegato -->
+  <records prefix="plone.bundles/plone" interface="Products.CMFPlone.interfaces.IBundleRegistry">
+    <value key="expression">python: member is not None</value>
+  </records>
+  <records prefix="plone.bundles/plone-fullscreen" interface="Products.CMFPlone.interfaces.IBundleRegistry">
+    <value key="expression">python: member is not None</value>
+  </records>
 </registry>

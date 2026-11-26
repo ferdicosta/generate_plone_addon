@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <p>® Plone Test</p>
+        <p>® {{namespace}}</p>
       </div>
     </div>
   </div>

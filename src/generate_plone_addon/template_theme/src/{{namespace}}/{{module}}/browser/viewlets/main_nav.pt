@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="m-nav__inner">
-          <a class="m-logo" tal:attributes="href context/portal_url">Plone Test</a>
+          <a class="m-logo" tal:attributes="href context/portal_url">{{namespace}}</a>
           <ul class="m-menu">
             <li tal:repeat="parent nav" tal:attributes="class python:'hasSubMenu' if parent['childs'] else None">
               <a tal:content="parent/title" tal:attributes="href parent/URL"></a>
