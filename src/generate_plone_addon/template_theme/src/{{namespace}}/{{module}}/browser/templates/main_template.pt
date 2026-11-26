@@ -33,13 +33,9 @@
     <metal:topslot define-slot="top_slot"/>
     <metal:headslot define-slot="head_slot"/>
 
-    <div tal:replace="structure provider:plone.scripts" />
-    <script src="++resource++{{package_name}}.js/scripts.js"></script>
-    <metal:javascriptslot define-slot="javascript_head_slot"/>
-
     <link tal:replace="structure provider:plone.htmlhead.links" />
-    <link rel="stylesheet" href="++resource++{{package_name}}.css/fontawesome.css" type="text/css"/>
-    <link rel="stylesheet" href="++resource++{{package_name}}.css/style.css" type="text/css"/>
+    <link rel="stylesheet" tal:attributes="href string:${portal_url}/++resource++{{package_name}}.css/fontawesome.css" type="text/css"/>
+    <link rel="stylesheet" tal:attributes="href string:${portal_url}/++resource++{{package_name}}.css/style.css" type="text/css"/>
     <metal:styleslot define-slot="style_slot"/>
 
     <meta name="generator" content="Plone - https://plone.org/"/>
@@ -48,8 +44,8 @@
 
   <body tal:define="isRTL portal_state/is_rtl;
     sl python:plone_layout.have_portlets('plone.leftcolumn', view);
-    sr python:plone_layout.have_portlets('plone.rightcolumn', view);
-    body_class python:plone_layout.bodyClass(template, view);"
+      sr python:plone_layout.have_portlets('plone.rightcolumn', view);
+        body_class python:plone_layout.bodyClass(template, view);"
      tal:attributes="class body_class;
     dir python:isRTL and 'rtl' or 'ltr';
     python:context.restrictedTraverse('@@plone_patterns_settings')();"
@@ -130,6 +126,10 @@
   </div>
 
   <tal:footermanager tal:content="structure provider:{{namespace}}.footermanager"/>
+
+  <div tal:replace="structure provider:plone.scripts" />
+  <script tal:attributes="src string:${portal_url}/++resource++{{package_name}}.js/scripts.js"></script>
+  <metal:javascriptslot define-slot="javascript_head_slot"/>
 
   </body>
   </html>
