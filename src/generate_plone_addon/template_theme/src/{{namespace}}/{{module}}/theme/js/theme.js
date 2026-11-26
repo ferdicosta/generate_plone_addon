@@ -1,6 +1,9 @@
 class StatusMessage {
+  static AUTO_CLOSE_DELAY = 3000;
+
   constructor(el) {
     this.el = el;
+    this.autoCloseTimer = null;
     this.close = this.close.bind(this);
 
     this.closeBtn = document.createElement('button');
@@ -20,9 +23,11 @@ class StatusMessage {
 
   open() {
     this.el.classList.add('show');
+    this.autoCloseTimer = setTimeout(this.close, StatusMessage.AUTO_CLOSE_DELAY);
   }
 
   close() {
+    clearTimeout(this.autoCloseTimer);
     this.el.classList.remove('show');
 
     setTimeout(() => {

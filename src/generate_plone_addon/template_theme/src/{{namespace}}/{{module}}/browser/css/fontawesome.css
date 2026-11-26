@@ -13,7 +13,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url("++resource++{{package_name}}.fonts/fa-brands-400.woff2") format("woff2"), url("++resource++{{package_name}}.fonts/fa-brands-400.ttf") format("truetype");
+  src: url("../++resource++{{package_name}}.fonts/fa-brands-400.woff2") format("woff2"), url("../++resource++{{package_name}}.fonts/fa-brands-400.ttf") format("truetype");
 }
 .fab,
 .fa-brands {
@@ -2107,7 +2107,7 @@
   font-style: normal;
   font-weight: 900;
   font-display: block;
-  src: url("++resource++{{package_name}}.fonts/fa-duotone-900.woff2") format("woff2"), url("++resource++{{package_name}}.fonts/fa-duotone-900.ttf") format("truetype");
+  src: url("../++resource++{{package_name}}.fonts/fa-duotone-900.woff2") format("woff2"), url("../++resource++{{package_name}}.fonts/fa-duotone-900.ttf") format("truetype");
 }
 .fad,
 .fa-duotone {
@@ -19868,7 +19868,7 @@ readers do not read off random characters that represent icons */
   font-style: normal;
   font-weight: 300;
   font-display: block;
-  src: url("++resource++{{package_name}}.fonts/fa-light-300.woff2") format("woff2"), url("++resource++{{package_name}}.fonts/fa-light-300.ttf") format("truetype");
+  src: url("../++resource++{{package_name}}.fonts/fa-light-300.woff2") format("woff2"), url("../++resource++{{package_name}}.fonts/fa-light-300.ttf") format("truetype");
 }
 .fal,
 .fa-light {
@@ -19890,7 +19890,7 @@ readers do not read off random characters that represent icons */
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url("++resource++{{package_name}}.fonts/fa-regular-400.woff2") format("woff2"), url("++resource++{{package_name}}.fonts/fa-regular-400.ttf") format("truetype");
+  src: url("../++resource++{{package_name}}.fonts/fa-regular-400.woff2") format("woff2"), url("../++resource++{{package_name}}.fonts/fa-regular-400.ttf") format("truetype");
 }
 .far,
 .fa-regular {
@@ -19912,7 +19912,7 @@ readers do not read off random characters that represent icons */
   font-style: normal;
   font-weight: 300;
   font-display: block;
-  src: url("++resource++{{package_name}}.fonts/fa-sharp-light-300.woff2") format("woff2"), url("++resource++{{package_name}}.fonts/fa-sharp-light-300.ttf") format("truetype");
+  src: url("../++resource++{{package_name}}.fonts/fa-sharp-light-300.woff2") format("woff2"), url("../++resource++{{package_name}}.fonts/fa-sharp-light-300.ttf") format("truetype");
 }
 .fasl,
 .fa-light {
@@ -19934,7 +19934,7 @@ readers do not read off random characters that represent icons */
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url("++resource++{{package_name}}.fonts/fa-sharp-regular-400.woff2") format("woff2"), url("++resource++{{package_name}}.fonts/fa-sharp-regular-400.ttf") format("truetype");
+  src: url("../++resource++{{package_name}}.fonts/fa-sharp-regular-400.woff2") format("woff2"), url("../++resource++{{package_name}}.fonts/fa-sharp-regular-400.ttf") format("truetype");
 }
 .fasr,
 .fa-regular {
@@ -19956,7 +19956,7 @@ readers do not read off random characters that represent icons */
   font-style: normal;
   font-weight: 900;
   font-display: block;
-  src: url("++resource++{{package_name}}.fonts/fa-sharp-solid-900.woff2") format("woff2"), url("++resource++{{package_name}}.fonts/fa-sharp-solid-900.ttf") format("truetype");
+  src: url("../++resource++{{package_name}}.fonts/fa-sharp-solid-900.woff2") format("woff2"), url("../++resource++{{package_name}}.fonts/fa-sharp-solid-900.ttf") format("truetype");
 }
 .fass,
 .fa-solid {
@@ -19978,7 +19978,7 @@ readers do not read off random characters that represent icons */
   font-style: normal;
   font-weight: 100;
   font-display: block;
-  src: url("++resource++{{package_name}}.fonts/fa-sharp-thin-100.woff2") format("woff2"), url("++resource++{{package_name}}.fonts/fa-sharp-thin-100.ttf") format("truetype");
+  src: url("../++resource++{{package_name}}.fonts/fa-sharp-thin-100.woff2") format("woff2"), url("../++resource++{{package_name}}.fonts/fa-sharp-thin-100.ttf") format("truetype");
 }
 .fast,
 .fa-thin {
@@ -20000,7 +20000,7 @@ readers do not read off random characters that represent icons */
   font-style: normal;
   font-weight: 900;
   font-display: block;
-  src: url("++resource++{{package_name}}.fonts/fa-solid-900.woff2") format("woff2"), url("++resource++{{package_name}}.fonts/fa-solid-900.ttf") format("truetype");
+  src: url("../++resource++{{package_name}}.fonts/fa-solid-900.woff2") format("woff2"), url("../++resource++{{package_name}}.fonts/fa-solid-900.ttf") format("truetype");
 }
 .fas,
 .fa-solid {
@@ -20022,7 +20022,7 @@ readers do not read off random characters that represent icons */
   font-style: normal;
   font-weight: 100;
   font-display: block;
-  src: url("++resource++{{package_name}}.fonts/fa-thin-100.woff2") format("woff2"), url("++resource++{{package_name}}.fonts/fa-thin-100.ttf") format("truetype");
+  src: url("../++resource++{{package_name}}.fonts/fa-thin-100.woff2") format("woff2"), url("../++resource++{{package_name}}.fonts/fa-thin-100.ttf") format("truetype");
 }
 .fat,
 .fa-thin {
